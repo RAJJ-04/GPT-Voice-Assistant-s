@@ -10,3 +10,4 @@ import webbrowser
 import os
 
 model = GPT4All
+print(model)  
