@@ -34,3 +34,9 @@ def respond(text):
     else:
         engine.say(text)
         engine.runAndWait()
+
+def listen_for_command():
+    with source as s:
+        print("Listening for commands...")
+        recognizer.adjust_for_ambient_noise(source)
+        audio = recognizer.listen(source)
