@@ -40,3 +40,8 @@ def listen_for_command():
         print("Listening for commands...")
         recognizer.adjust_for_ambient_noise(source)
         audio = recognizer.listen(source)
+
+    try:
+        with open("command.wav", "wb") as f:
+            f.write(audio.get_wav_data())
+        command = base_model.transcribe("command.wav")
