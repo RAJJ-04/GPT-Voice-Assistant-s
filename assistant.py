@@ -9,7 +9,7 @@ import pyautogui
 import webbrowser
 import os
 
-model = GPT4All("C:/Users/cptli/Documents/dev/Python", allow_download=False)
+model = GPT4All("D:\Projects\AI\models\gpt4all-falcon-newbpe-q4_0.gguf", allow_download=False)
 assistant_name = "max"
 listening_for_trigger_word = True
 should_run = True
