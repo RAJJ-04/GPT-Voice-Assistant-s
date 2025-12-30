@@ -38,16 +38,25 @@ tasks = []
 listening_to_task = False
 asking_question = False
 
+
+
 def listen_for_command():
     with source as s:
         recognizer.adjust_for_ambient_noise(s, duration=0.5)
         print("Listening...")
         audio = recognizer.listen(s)
+                                                                                 # LISTEN FUNCTION 
+    with open("command.wav", "wb") as f:
+        f.write(audio.get_wav_data())
 
-    try:
-        with open("command.wav", "wb") as f:
-            f.write(audio.get_wav_data())
-        command = base_model.transcribe("command.wav")
+    result = base_model.transcribe("command.wav")
+    command = result["text"].strip().lower()
+
+    print("Heard:", command)
+    return command
+
+
+
 
 def perform_command(command):
     global tasks
