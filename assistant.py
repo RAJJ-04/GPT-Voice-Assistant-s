@@ -59,11 +59,25 @@ def listen_for_command():
 
 
 def perform_command(command):
-    global tasks
-    global listeningToTask
-    global askingAQuestion
-    global should_run
-    global listening_for_trigger_word
+    global listening_to_task, asking_question, should_run
+
+    if not command:
+        return
+
+    if listening_to_task:
+        tasks.append(command)
+        listening_to_task = False
+        respond(f"Task added. You now have {len(tasks)} tasks.")
+        return
+
+    if asking_question:
+        asking_question = False
+        respond("Thinking...")
+        output = model.generate(command, max_tokens=200)
+        respond(output)
+        return
+    
+    
     if command:
         print("Command: ", command)
         if listeningToTask:
