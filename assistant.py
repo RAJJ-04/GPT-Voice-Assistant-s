@@ -40,9 +40,9 @@ asking_question = False
 
 def listen_for_command():
     with source as s:
-        print("Listening for commands...")
-        recognizer.adjust_for_ambient_noise(source)
-        audio = recognizer.listen(source)
+        recognizer.adjust_for_ambient_noise(s, duration=0.5)
+        print("Listening...")
+        audio = recognizer.listen(s)
 
     try:
         with open("command.wav", "wb") as f:
