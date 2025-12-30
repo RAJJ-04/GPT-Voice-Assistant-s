@@ -77,20 +77,18 @@ def perform_command(command):
         respond(output)
         return
     
-    
-    if command:
-        print("Command: ", command)
-        if listeningToTask:
-            tasks.append(command)
-            listeningToTask = False
-            respond("Adding " + command + " to your task list. You have " + str(len(tasks)) + " currently in your list.")
-        elif "add a task" in command:
-            listeningToTask = True
-            respond("Sure, what is the task?")
-        elif "list tasks" in command:
-            respond("Sure. Your tasks are:")
+
+    if "add a task" in command:
+        listening_to_task = True
+        respond("Sure, what is the task?")
+    elif "list tasks" in command:
+        if not tasks:
+            respond("Your task list is empty.")
+        else:
+            respond("Your tasks are:")
             for task in tasks:
                 respond(task)
+                
         elif "take a screenshot" in command:
             pyautogui.screenshot("screenshot.png")
             respond("I took a screenshot for you.")
