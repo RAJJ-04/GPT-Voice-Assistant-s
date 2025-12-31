@@ -18,7 +18,8 @@ recognizer = sr.Recognizer()
 print("Loading Whisper model...")
 
 # base_model_path = os.path.expanduser('~/.cache/whisper/base.pt')
-base_model = whisper.load_model(base_model_path)
+base_model = whisper.load_model("base")
+
 
 if sys.platform != "darwin":
     import pyttsx3
