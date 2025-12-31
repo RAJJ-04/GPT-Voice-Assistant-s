@@ -89,28 +89,20 @@ def perform_command(command):
             for task in tasks:
                 respond(task)
                 
-        elif "take a screenshot" in command:
-            pyautogui.screenshot("screenshot.png")
-            respond("I took a screenshot for you.")
-        elif "open chrome" in command:
-            respond("Opening Chrome.")
-            webbrowser.open("http://www.youtube.com")
-        elif "ask a question" in command:
-            askingAQuestion = True
-            respond("What's your question?")
-            return
-        elif askingAQuestion:
-            askingAQuestion = False
-            respond("Thinking...")
-            print("User command: ", command)
-            output = model.generate(command, max_tokens=200)
-            print("Output: ", output)
-            respond(output)
-        elif "exit" in command:
-            should_run = False
-        else:
-            respond("Sorry, I'm not sure how to handle that command.")
-    listening_for_trigger_word = True
+    elif "take a screenshot" in command:
+        pyautogui.screenshot("screenshot.png")
+        respond("Screenshot taken.")
+    elif "open chrome" in command:
+        respond("Opening YouTube.")
+        webbrowser.open("https://www.youtube.com")
+    elif "ask a question" in command:
+        asking_question = True
+        respond("What is your question?")
+    elif "exit" in command or "quit" in command:
+        respond("Goodbye.")
+        should_run = False
+    else:
+        respond("Sorry, I did not understand that.")
 
 def main():
     global listening_for_trigger_word
