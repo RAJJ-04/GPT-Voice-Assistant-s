@@ -105,15 +105,11 @@ def perform_command(command):
         respond("Sorry, I did not understand that.")
 
 def main():
-    global listening_for_trigger_word
+    respond(f"{assistant_name} is ready.")
     while should_run:
         command = listen_for_command()
-        if listening_for_trigger_word:
-            listening_for_trigger_word = False
-        else:
-            perform_command(command)
-        time.sleep(1)
-    respond("Goodbye.")
+        perform_command(command)
+        time.sleep(0.5)
 
 if __name__ == "__main__":
     main()
