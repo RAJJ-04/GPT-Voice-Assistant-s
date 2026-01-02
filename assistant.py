@@ -1,5 +1,7 @@
 from os import system
-import speech_recognition as sr
+import sounddevice as sd
+from scipy.io.wavfile import write
+import numpy as np
 from gpt4all import GPT4All
 import sys
 import whisper
@@ -16,8 +18,6 @@ model = GPT4All(
 assistant_name = "max"
 listening_for_trigger_word = True
 should_run = True
-source = sr.Microphone()
-recognizer = sr.Recognizer()
 print("Loading Whisper model...")
 
 # base_model_path = os.path.expanduser('~/.cache/whisper/base.pt')
