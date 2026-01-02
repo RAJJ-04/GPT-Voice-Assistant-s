@@ -44,20 +44,25 @@ asking_question = False
 
 
 
-def listen_for_command():
-    with source as s:
-        recognizer.adjust_for_ambient_noise(s, duration=0.5)
-        print("Listening...")
-        audio = recognizer.listen(s)
-                                                                                 # LISTEN FUNCTION 
-    with open("command.wav", "wb") as f:
-        f.write(audio.get_wav_data())
+def listen_for_command(duration=5, fs=16000):
+    print("Listening...")
+
+    recording = sd.rec(
+        int(duration * fs),
+        samplerate=fs,
+        channels=1,
+        dtype=np.int16
+    )
+    sd.wait()
+
+    write("command.wav", fs, recording)
 
     result = base_model.transcribe("command.wav")
     command = result["text"].strip().lower()
 
     print("Heard:", command)
     return command
+
 
 
 
