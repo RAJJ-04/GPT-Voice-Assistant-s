@@ -21,7 +21,7 @@ should_run = True
 print("Loading Whisper model...")
 
 # base_model_path = os.path.expanduser('~/.cache/whisper/base.pt')
-base_model = whisper.load_model("base")
+base_model = whisper.load_model("tiny")
 
 
 if sys.platform != "darwin":
@@ -90,7 +90,7 @@ def perform_command(command):
         return
     
 
-    if "add a task" in command:
+    if "add" in command and "task" in command:
         listening_to_task = True
         respond("Sure, what is the task?")
     elif "list tasks" in command:
