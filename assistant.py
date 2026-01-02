@@ -117,11 +117,35 @@ def perform_command(command):
         respond("Sorry, I did not understand that.")
 
 def main():
-    respond(f"{assistant_name} is ready.")
+    respond(f"{assistant_name} is ready. Say '{assistant_name}' to wake me up.")
+
     while should_run:
         command = listen_for_command()
-        perform_command(command)
+
+        if not command or len(command.strip()) < 3:
+            continue
+
+        if assistant_name in command:
+            print("Wake word detected")
+
+            command = command.replace(assistant_name, "").strip()
+
+            if not command:
+                respond("Yes?")
+                continue
+
+            perform_command(command)
+        else:
+            print("Wake word not detected")
         time.sleep(0.5)
+
+
+
+
+
+
+
+
 
 if __name__ == "__main__":
     main()
