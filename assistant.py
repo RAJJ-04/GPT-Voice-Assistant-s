@@ -70,6 +70,9 @@ def listen_for_command(duration=5, fs=16000):
 def perform_command(command):
     global listening_to_task, asking_question, should_run
 
+    if len(command) < 3:
+        return
+
     if not command:
         return
 
